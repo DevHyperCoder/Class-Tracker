@@ -1,25 +1,47 @@
 package com.codeyard.classtracker;
 
+import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MaterialCardView card1;
+
+    private void init(){
+        card1 = findViewById(R.id.card1);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        init();
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                card1.toggle();
+            }
+        });
 
         final Intent add = new Intent(this, AddClass.class);
 

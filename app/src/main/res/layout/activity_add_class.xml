@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".AddClass">
 
+
     <EditText
         android:id="@+id/txtDay"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="72dp"
+        android:backgroundTint="#188FED"
         android:ems="0"
         android:hint="day"
         android:inputType="textPersonName"
+        android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,9 +43,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="72dp"
+        android:backgroundTint="#188FED"
         android:ems="10"
         android:hint="time"
         android:inputType="time"
+        android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDay" />
 
@@ -58,7 +63,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtDay"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,13 +72,14 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="38dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="13dp"
         android:text="Lecture:"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtClass"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -81,13 +87,16 @@
         android:id="@+id/txtClass"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="72dp"
+        android:backgroundTint="#188FED"
         android:ems="10"
         android:hint="Lecture"
         android:inputType="textPersonName"
+        android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTime" />
+
 
     <Button
         android:id="@+id/btnSave"
@@ -102,6 +111,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.711"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtClass" />
+    <TextView
+        android:id="@+id/txtWarnDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CD0C0C"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtDay"
+        app:layout_constraintTop_toBottomOf="@+id/txtDay" />
+
+    <TextView
+        android:id="@+id/txtWarnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CD0C0C"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtTime"
+        app:layout_constraintTop_toBottomOf="@+id/txtTime" />
+
+    <TextView
+        android:id="@+id/txtWarnLecture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CD0C0C"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtClass"
         app:layout_constraintTop_toBottomOf="@+id/txtClass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
