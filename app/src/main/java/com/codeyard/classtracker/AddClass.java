@@ -37,14 +37,14 @@ public class AddClass extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validatedata()) {
+                if (validateData()) {
                     Toast.makeText(AddClass.this,"Clicked",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private boolean validatedata(){
+    private boolean validateData(){
         if (txtDay.getText().toString().isEmpty()){
             txtWarnDay.setText("Enter Day");
             return false;
