@@ -1,31 +1,28 @@
 package com.codeyard.classtracker;
 
-import android.animation.ObjectAnimator;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.orm.SchemaGenerator;
+import com.orm.SugarContext;
+import com.orm.SugarDb;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.transition.Slide;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.animation.DecelerateInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 
     private MaterialCardView card1;
 
-    private void init(){
+    private void init() {
         card1 = findViewById(R.id.card1);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         card1.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 card1.toggle();
             }
         });
@@ -52,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(add);
             }
         });
+
+
+
+//        SugarContext.init(MainActivity.this);
+//        SchemaGenerator schemaGenerator = new SchemaGenerator(this);
+//        schemaGenerator.createDatabase(new SugarDb(this).getDB());
     }
 
     @Override

@@ -77,8 +77,7 @@ public class AddClass extends AppCompatActivity {
         });
     }
 
-    private boolean validatedata(){
-
+    private boolean validateData(){
         if (txtTime.getText().toString().isEmpty()){
             txtWarnTime.setText("Enter Time");
             return false;
