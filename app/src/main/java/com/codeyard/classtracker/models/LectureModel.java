@@ -2,19 +2,19 @@ package com.codeyard.classtracker.models;
 
 import com.orm.SugarRecord;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class LectureModel extends SugarRecord {
     private String name;
-    private LocalDateTime date;
+    private Date date;
 
     //    For sugarDb
     public LectureModel() {
 
     }
 
-//    Normal Constructor
-    public LectureModel(String name, LocalDateTime date) {
+    //    Normal Constructor
+    public LectureModel(String name, Date date) {
         this.name = name;
         this.date = date;
     }
@@ -27,14 +27,13 @@ public class LectureModel extends SugarRecord {
         this.name = name;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
 
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
-
 
 }

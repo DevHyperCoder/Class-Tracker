@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddClass" />
 
         <meta-data android:name="DATABASE" android:value="class_track.db" />
         <meta-data android:name="VERSION" android:value="2" />
