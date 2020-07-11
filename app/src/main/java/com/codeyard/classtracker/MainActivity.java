@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        SugarContext.init(MainActivity.this);
-//        SchemaGenerator schemaGenerator = new SchemaGenerator(this);
-//        schemaGenerator.createDatabase(new SugarDb(this).getDB());
+        SugarContext.init(MainActivity.this);
+        SchemaGenerator schemaGenerator = new SchemaGenerator(this);
+        schemaGenerator.createDatabase(new SugarDb(this).getDB());
     }
 
     @Override
