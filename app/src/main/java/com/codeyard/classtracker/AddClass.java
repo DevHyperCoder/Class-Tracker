@@ -63,14 +63,10 @@ public class AddClass extends AppCompatActivity {
         daySpinner.setAdapter(dataAdapter);
 
 
-
-
-
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validatedata()) {
+                if (validateData()) {
                     Toast.makeText(AddClass.this,"Clicked",Toast.LENGTH_SHORT).show();
                 }
             }
