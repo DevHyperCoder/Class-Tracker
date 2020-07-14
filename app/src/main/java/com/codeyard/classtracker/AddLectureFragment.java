@@ -79,7 +79,7 @@ public class AddLectureFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_lecture, container, false);
 
-//        Get all the view instances
+        //Get all the view instances
         txtTime = view.findViewById(R.id.txtTime);
         txtClass = view.findViewById(R.id.txtClass);
         btnSave = view.findViewById(R.id.btnSave);
