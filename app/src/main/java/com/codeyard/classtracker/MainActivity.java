@@ -1,13 +1,15 @@
 package com.codeyard.classtracker;
 
-import android.bluetooth.BluetoothGattDescriptor;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.codeyard.classtracker.models.LectureModel;
 import com.google.android.material.card.MaterialCardView;
@@ -17,11 +19,6 @@ import com.orm.SugarContext;
 import com.orm.SugarDb;
 
 import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = MainActivity.class.getName();
@@ -37,7 +34,7 @@ FrameLayout frameLayout;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-frameLayout = findViewById(R.id.frameLayout);
+        frameLayout = findViewById(R.id.frameLayout);
 //        init();
 
 //        card1.setOnClickListener(new View.OnClickListener() {
@@ -49,18 +46,13 @@ frameLayout = findViewById(R.id.frameLayout);
 //
 //TODO add a different layout (fragment) for the card views
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 //Chnge the layout toi the fragment
-                Fragment addClassFragment = new AddLectureFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout,addClassFragment)
-                        .commit();
-
-
-            }
+            Fragment addClassFragment = new AddLectureFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frameLayout,addClassFragment)
+                    .commit();
         });
 
         SugarContext.init(MainActivity.this);
@@ -77,7 +69,6 @@ frameLayout = findViewById(R.id.frameLayout);
             Log.d(TAG, "onResume: LECTURE");
             Log.d(TAG, "onResume: NAME: "+getAllLectures().get(i).getName());
             Log.d(TAG, "onResume: DATE: "+getAllLectures().get(i).getDate().toString());
-
         }
     }
 

@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.codeyard.classtracker.models.LectureModel;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
