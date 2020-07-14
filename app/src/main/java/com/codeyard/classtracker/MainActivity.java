@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = MainActivity.class.getName();
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             Fragment addClassFragment = new AddLectureFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout, addClassFragment)
+                    .replace(R.id.frameLayout, addClassFragment).addToBackStack(AddLectureFragment.class.getName())
                     .commit();
 
 
@@ -57,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         DBHelper.initDb(MainActivity.this);
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
