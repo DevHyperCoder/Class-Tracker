@@ -1,33 +1,35 @@
 package com.codeyard.classtracker;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.codeyard.classtracker.db.DBHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import com.codeyard.classtracker.models.LectureModel;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.orm.SchemaGenerator;
-import com.orm.SugarContext;
-import com.orm.SugarDb;
-
-import java.util.List;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = MainActivity.class.getName();
-    private MaterialCardView card1;
 
-//    private void init() {
-//        card1 = findViewById(R.id.card1);
-//    }
-FrameLayout frameLayout;
+    FrameLayout frameLayout;
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,41 +37,25 @@ FrameLayout frameLayout;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         frameLayout = findViewById(R.id.frameLayout);
-//        init();
 
-//        card1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                card1.toggle();
-//            }
-//        });
-//
-//TODO add a different layout (fragment) for the card views
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment cardFragment = new CardFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, cardFragment)
+                .commit();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-//Chnge the layout toi the fragment
+
             Fragment addClassFragment = new AddLectureFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.frameLayout,addClassFragment)
+                    .replace(R.id.frameLayout, addClassFragment)
                     .commit();
+
+
         });
 
-        SugarContext.init(MainActivity.this);
-        SchemaGenerator schemaGenerator = new SchemaGenerator(this);
-        schemaGenerator.createDatabase(new SugarDb(this).getDB());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-        Log.d(TAG, "onResume: " + getAllLectures());
-        for (int i =0;i<getAllLectures().size();i++){
-            Log.d(TAG, "onResume: LECTURE");
-            Log.d(TAG, "onResume: NAME: "+getAllLectures().get(i).getName());
-            Log.d(TAG, "onResume: DATE: "+getAllLectures().get(i).getDate().toString());
-        }
+        DBHelper.initDb(MainActivity.this);
     }
 
     @Override
@@ -78,11 +64,6 @@ FrameLayout frameLayout;
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-    public List<LectureModel> getAllLectures() {
-        return LectureModel.listAll(LectureModel.class);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

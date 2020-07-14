@@ -1,5 +1,7 @@
 package com.codeyard.classtracker.models;
 
+import android.util.Log;
+
 import com.orm.SugarRecord;
 
 import java.util.Date;
@@ -12,7 +14,7 @@ public class LectureModel extends SugarRecord {
     public LectureModel() {
 
     }
-
+String TAG = LectureModel.class.getName();
     //    Normal Constructor
     public LectureModel(String name, Date date) {
         this.name = name;
