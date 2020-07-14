@@ -129,4 +129,5 @@ public class AddLectureFragment extends Fragment {
         });
         return view;
     }
+
 }

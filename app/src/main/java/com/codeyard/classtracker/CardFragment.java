@@ -10,7 +10,6 @@ import com.codeyard.classtracker.adapters.LectureAdapter;
 import com.codeyard.classtracker.db.DBHelper;
 import com.codeyard.classtracker.models.LectureModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
@@ -28,6 +27,7 @@ public class CardFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    final String TAG = CardFragment.class.getName();
     RecyclerView upcomingClassesRecyclerView;
     List<LectureModel> lectures;
     LectureAdapter lectureAdapter;
@@ -40,14 +40,6 @@ public class CardFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CardFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static CardFragment newInstance(String param1, String param2) {
         CardFragment fragment = new CardFragment();
@@ -66,28 +58,25 @@ public class CardFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-final String TAG = CardFragment.class.getName();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_card, container, false);
 
-
-
         upcomingClassesRecyclerView = view.findViewById(R.id.upcoming_classes_recycler_view);
-        upcomingClassesRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity());
-        Log.d(TAG, "onCreateView: "+requireActivity().toString());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        Log.d(TAG, "onCreateView: " + requireActivity().toString());
+
         upcomingClassesRecyclerView.setLayoutManager(layoutManager);
 
-        lectures=DBHelper.getAllLectures();
+        lectures = DBHelper.getAllLectures();
         lectureAdapter = new LectureAdapter(lectures);
         upcomingClassesRecyclerView.setAdapter(lectureAdapter);
+
         return view;
     }
-
-
 }
