@@ -14,6 +14,20 @@ public class LectureModel extends SugarRecord {
     private String name;
     private Date date;
 
+    @Ignore
+    int viewType;
+
+    @Ignore
+    private String heading;
+
+    public String getHeading() {
+        return heading;
+    }
+
+    public void setHeading(String heading) {
+        this.heading = heading;
+    }
+
     //    For sugarDb
     @SuppressWarnings("unused")
     public LectureModel() {
@@ -24,6 +38,14 @@ public class LectureModel extends SugarRecord {
     public LectureModel(String name, Date date) {
         this.name = name;
         this.date = date;
+    }
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
     }
 
     public String getName() {
