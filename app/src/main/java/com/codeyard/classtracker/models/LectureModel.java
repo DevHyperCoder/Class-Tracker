@@ -1,20 +1,25 @@
 package com.codeyard.classtracker.models;
 
-import android.util.Log;
-
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import java.util.Date;
 
+/**
+ * Model for Lectures to be stored in db using SugarDB
+ */
 public class LectureModel extends SugarRecord {
+    @Ignore
+    String TAG = LectureModel.class.getName();
     private String name;
     private Date date;
 
     //    For sugarDb
+    @SuppressWarnings("unused")
     public LectureModel() {
 
     }
-String TAG = LectureModel.class.getName();
+
     //    Normal Constructor
     public LectureModel(String name, Date date) {
         this.name = name;
