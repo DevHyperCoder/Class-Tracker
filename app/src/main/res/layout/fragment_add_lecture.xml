@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 >
@@ -21,15 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtTime"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginEnd="72dp"
         android:backgroundTint="#188FED"
-        android:ems="10"
-        android:hint="time"
-        android:inputType="time"
         android:textCursorDrawable="@null"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -112,13 +110,14 @@
         app:layout_constraintTop_toBottomOf="@+id/txtClass" />
 
     <TextView
-        android:id="@+id/editTextDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:text="Name"
+        android:id="@+id/dateTextView"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:text="Date"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5"
         app:layout_constraintVertical_bias="1.0" />
 
