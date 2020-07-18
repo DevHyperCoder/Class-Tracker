@@ -5,16 +5,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.codeyard.classtracker.db.DBHelper;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.codeyard.classtracker.db.DBHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
     final String TAG = MainActivity.class.getName();
+
+
 
     FrameLayout frameLayout;
 
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DBHelper.initDb(MainActivity.this);
+
+
     }
 
 

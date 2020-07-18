@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.codeyard.classtracker.models.DateTimeModel;
 import com.codeyard.classtracker.models.LectureModel;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -16,9 +19,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +41,8 @@ public class AddLectureFragment extends Fragment {
     private TextView dateTextView;
     private TimePickerDialog timePickerDialog;
     private DatePickerDialog datePickerDialog;
+
+
 
     public AddLectureFragment() {
         // Required empty public constructor
