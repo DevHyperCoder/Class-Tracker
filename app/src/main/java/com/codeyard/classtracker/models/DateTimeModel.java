@@ -15,7 +15,9 @@ public class DateTimeModel {
     private int monthOfYear;
     private int dayOfMonth;
     private Calendar calendar;
-
+public Calendar getCalendar(){
+    return calendar;
+}
     /**
      * Constructor
      * Initialises the calender instance
