@@ -13,6 +13,7 @@ import com.codeyard.classtracker.db.DBHelper;
 import com.codeyard.classtracker.models.LectureModel;
 import com.codeyard.classtracker.notification.NotificationHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.core.app.NotificationManagerCompat;
@@ -39,7 +40,9 @@ public class CardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_card, container, false);
 
         upcomingClassesRecyclerView = view.findViewById(R.id.upcoming_classes_recycler_view);
@@ -50,21 +53,26 @@ public class CardFragment extends Fragment {
 
         upcomingClassesRecyclerView.setLayoutManager(layoutManager);
 
-        lectures = DBHelper.getAllLectures();
+        LectureModel lectureModel = new LectureModel();
+        lectureModel.setViewType(Constants.ITME_HEADER);
+        lectureModel.setHeading("Upcoming Classes");
+
+        lectures = new ArrayList<>();
+
+        lectures.add(lectureModel);
+
+
+        lectures.addAll(DBHelper.getAllLecturesAfterCurrentTime());
+
         for (int i = 0; i < lectures.size(); i++) {
             lectures.get(i).setViewType(Constants.ITEM_NORMAL);
         }
-
-        LectureModel lectureModel = new LectureModel();
-        lectureModel.setViewType(Constants.ITME_HEADER);
-        lectureModel.setHeading("alheading");
-        lectures.add(lectureModel);
 
         lectureAdapter = new LectureAdapter(lectures);
         upcomingClassesRecyclerView.setAdapter(lectureAdapter);
 
 //        Create a notification channel if the version is >= 26
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O && NotificationManagerCompat.from(requireActivity()).getNotificationChannel("classChannelID") == null) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && NotificationManagerCompat.from(requireActivity()).getNotificationChannel("classChannelID") == null) {
             NotificationHelper.createClassChannel(requireActivity());
         }
 
