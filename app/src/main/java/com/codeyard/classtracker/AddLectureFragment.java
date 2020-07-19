@@ -8,17 +8,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
+import com.codeyard.classtracker.constants.Constants;
 import com.codeyard.classtracker.models.DateTimeModel;
 import com.codeyard.classtracker.models.LectureModel;
+import com.codeyard.classtracker.notification.NotificationHelper;
+import com.codeyard.classtracker.util.SharedPreferenceUtil;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +45,6 @@ public class AddLectureFragment extends Fragment {
     private TextView dateTextView;
     private TimePickerDialog timePickerDialog;
     private DatePickerDialog datePickerDialog;
-
 
 
     public AddLectureFragment() {
@@ -83,11 +86,12 @@ public class AddLectureFragment extends Fragment {
 
         DateTimeModel dateTimeModel = new DateTimeModel();
 
+//onClickListeners for both the textViews.
         dateTextView.setOnClickListener(view14 -> {
             datePickerDialog = DatePickerDialog.newInstance((view141, year, monthOfYear, dayOfMonth) -> {
-                String dateString = "";
+
                 dateTimeModel.setDate(year, dayOfMonth, monthOfYear);
-                dateString = dateTimeModel.getDateString();
+                String dateString = dateTimeModel.getDateString();
 
                 dateTextView.setText(dateString);
             }, Calendar.getInstance());
@@ -96,38 +100,47 @@ public class AddLectureFragment extends Fragment {
 
         txtTime.setOnClickListener(view13 -> {
             timePickerDialog = TimePickerDialog.newInstance((view12, hourOfDay, minute, second) -> {
-                Log.d(TAG, "onTimeSet: " + hourOfDay);
-                Log.d(TAG, "onTimeSet: " + minute);
-                Log.d(TAG, "onTimeSet: " + second);
 
-                String timeString = "";
+                dateTimeModel.setTime(hourOfDay, minute, second);
 
-                dateTimeModel.setTime(hourOfDay,minute,second);
-                timeString=dateTimeModel.getTimeString();
-
+                String timeString = dateTimeModel.getTimeString();
                 txtTime.setText(timeString);
 
             }, false);
             timePickerDialog.show(requireFragmentManager(), TAG);
         });
         btnSave.setOnClickListener(view1 -> {
-            int hour = timePickerDialog.getSelectedTime().getHour();
-            int minute = timePickerDialog.getSelectedTime().getMinute();
-            int second = timePickerDialog.getSelectedTime().getSecond();
-            int year = datePickerDialog.getSelectedDay().getYear();
-            int monthOfYear = datePickerDialog.getSelectedDay().getMonth();
-            int dayOfMonth = datePickerDialog.getSelectedDay().getDay();
 
 
-            dateTimeModel.setDate(year, dayOfMonth, monthOfYear);
-            dateTimeModel.setTime(hour, minute, second);
+//            Get the beforeTime and if its empty then default val is 15 mins.
+            SharedPreferenceUtil sharedPreferenceUtil = new SharedPreferenceUtil(requireActivity());
+            int beforeTimeInMinutes = sharedPreferenceUtil.setSharedPrefernceInt(Constants.NOTIFICATION_TIME_BEFORE);
 
+            if (beforeTimeInMinutes == 0) {
+                beforeTimeInMinutes = Constants.NOTIFICATION_TIME_BEFORE_DEFAULT;
+            }
+
+
+//            Create a calendar obj with the date and time the user has provided. Reduce the minute by the beforeTime
+            Calendar calendar = (dateTimeModel.getCalendar());
+            calendar.add(Calendar.MINUTE, -(beforeTimeInMinutes));
+
+//            Check if the Date or Time is before the current date and time - the beforeTime
+            if (Calendar.getInstance().after(calendar)) {
+                Log.d(TAG, "onCreateView: before today lol");
+                Toast.makeText(requireActivity(), "Choose a date & time after today", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+//            All checks complete. Add to Database
             Date date = dateTimeModel.getDate();
-
             String name = txtClass.getText().toString();
 
             LectureModel lectureModel = new LectureModel(name, date);
             lectureModel.save();
+
+//            Create a scheduled notification
+            NotificationHelper.scheduleNotification(requireActivity(), calendar);
 
             FragmentManager fragmentManager = getFragmentManager();
             if (fragmentManager != null) {
